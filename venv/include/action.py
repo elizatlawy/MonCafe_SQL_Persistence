@@ -1,7 +1,7 @@
 import os
 import sqlite3
 import sys
-from persistence import repo, Activitie, Product
+from persistence import *
 import printdb
 
 
