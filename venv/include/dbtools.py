@@ -49,6 +49,11 @@ class Dao(object):
         c.execute('SELECT * FROM {}'.format(self._table_name))
         return orm(c, self._dto_type)
 
+    def find_all_ordered_by(self, order_parm):
+        c = self._conn.cursor()
+        c.execute('SELECT * FROM {} ORDER BY {}'.format(self._table_name, order_parm))
+        return orm(c, self._dto_type)
+
     def find(self, **keyvals):
         column_names = keyvals.keys()
         params = tuple(keyvals.values())

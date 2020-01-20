@@ -18,7 +18,7 @@ class Supplier(object):
     def __init__(self, id, name, contact_information):
         self.id = id
         self.name = name
-        self.contact_information = contact_information
+        self.contact_information = contact_information.rstrip()
 
 
 class Product(object):
@@ -53,6 +53,13 @@ class Repository:
         self.Products = Dao(Product, self._conn)
         self.Coffee_stands = Dao(Coffee_stand, self._conn)
         self.Activities = Dao(Activitie, self._conn)
+
+    def drop_all_tables(self):
+        self._conn.executescript("""DROP TABLE Activities;
+        DROP TABLE Coffee_stands;
+        DROP TABLE Employees;
+        DROP TABLE Products;
+        DROP TABLE Suppliers;""")
 
     def _close(self):
         self._conn.commit()
@@ -98,5 +105,3 @@ class Repository:
 # singleton
 repo = Repository()
 atexit.register(repo._close)
-
-

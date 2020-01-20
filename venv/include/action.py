@@ -1,7 +1,8 @@
 import os
 import sqlite3
 import sys
-from persistence import *
+from persistence import repo, Activitie, Product
+import printdb
 
 
 def update_db(input_file):
@@ -20,6 +21,6 @@ def update_db(input_file):
                 repo.Activities.insert(curr_act)
 
 
-
 if __name__ == '__main__':
     update_db(sys.argv[1])
+    printdb.print_db()
