@@ -54,13 +54,6 @@ class Repository:
         self.Coffee_stands = Dao(Coffee_stand, self._conn)
         self.Activities = Dao(Activitie, self._conn)
 
-    def drop_all_tables(self):
-        self._conn.executescript("""DROP TABLE Activities;
-        DROP TABLE Coffee_stands;
-        DROP TABLE Employees;
-        DROP TABLE Products;
-        DROP TABLE Suppliers;""")
-
     def _close(self):
         self._conn.commit()
         self._conn.close()

@@ -1,8 +1,13 @@
 import sqlite3
 import sys
-import printdb
 import os
-from persistence import *
+
+
+def delete_db():
+    try:
+        os.remove('moncafe.db')
+    except OSError:
+        pass
 
 
 def insert_to_tables(input_file):
@@ -24,8 +29,11 @@ def insert_to_tables(input_file):
 
 
 if __name__ == '__main__':
-    if os.path.exists('moncafe.db'):
-        repo.drop_all_tables()
+    # delete the db if it is already exist
+    delete_db()
+    # the import is here so the connection only happens after you delete the old db
+    from persistence import *
+    import printdb
     repo.create_tables()
     insert_to_tables(sys.argv[1])
     printdb.print_db()

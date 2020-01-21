@@ -22,8 +22,6 @@ def row_map(row, col_mapping, dto_type):
     return dto_type(*ctor_args)
 
 
-# we can use our method above in order to start writing a generic Dao
-# note that this class is not complete and we will add methods to it next
 class Dao(object):
     def __init__(self, dto_type, conn):
         self._conn = conn
@@ -66,7 +64,7 @@ class Dao(object):
         return orm(c, self._dto_type)
 
     def update_quantity(self, product_id, amount):
-        stmt = """ UPDATE Products SET quantity = quantity+? WHERE id=? """
+        stmt = "UPDATE Products SET quantity = quantity+? WHERE id=?"
         params = (amount, product_id)
         c = self._conn.cursor()
         c.execute(stmt, params)

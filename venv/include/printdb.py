@@ -7,7 +7,6 @@ from persistence import *
 
 def print_db():
     print("Activities")
-
     for activity in repo.Activities.find_all_ordered_by('date'):
         activity_tuple = (activity.product_id, activity.quantity, activity.activator_id, activity.date)
         print(activity_tuple)
@@ -29,6 +28,7 @@ def print_db():
         print(supplier_tuple)
 
     employees = repo.Employees.find_all_ordered_by('name')
+    # print the Employees report if there are Employees
     if employees is not None:
         print("Employees report")
         for employee in employees:
@@ -39,7 +39,7 @@ def print_db():
                     total_sales = total_sales + (-activity.quantity * curr_product.price)
             employee_tuple = (employee.id, employee.name, employee.salary, total_sales)
             print(employee_tuple)
-
+    # print the Activities report if there are activities
     cursor = repo._conn.cursor()
     cursor.execute("""SELECT Activities.date, Products.description, Activities.quantity, Employees.name, Suppliers.name 
                               FROM Activities INNER JOIN Products ON Activities.product_id = Products.id
