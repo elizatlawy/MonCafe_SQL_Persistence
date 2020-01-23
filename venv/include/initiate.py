@@ -33,7 +33,5 @@ if __name__ == '__main__':
     delete_db()
     # the import is here so the connection only happens after you delete the old db
     from persistence import *
-    import printdb
     repo.create_tables()
     insert_to_tables(sys.argv[1])
-    printdb.print_db()

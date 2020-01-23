@@ -11,7 +11,7 @@ def update_db(input_file):
             data = line.split(', ')
             curr_product = repo.Products.find(id=data[0])[0]
             if int(data[1]) < 0:  # it is a sale
-                if curr_product.quantity >= int(data[1]):  # check if the quantity is enough to sell
+                if curr_product.quantity >= (- int(data[1])):  # check if the quantity is enough to sell
                     repo.Products.update_quantity(data[0], data[1])
                     curr_act = Activitie(data[0], data[1], data[2], data[3])
                     repo.Activities.insert(curr_act)
